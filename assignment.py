@@ -68,7 +68,7 @@ with col3:
     st.metric("Unique Varieties", filtered_df['variety_name'].nunique())
 
 # Insight 1: Average prices by country and product
-st.subheader("📈 Insight 1: Average Prices by Country and Product")
+st.subheader("📈 1: Average Prices by Country and Product")
 avg_prices = filtered_df.groupby(['memberStateCode', 'product'])['price'].mean().unstack()
 
 # Create a bar chart using Matplotlib
@@ -81,7 +81,7 @@ ax.legend(title="Product")
 st.pyplot(fig)
 
 # Insight 2: Price trends over time by country and product
-st.subheader("📉 Insight 2: Price Trends Over Time by Country and Product")
+st.subheader("📉 2: Price Trends Over Time by Country and Product")
 if 'beginDate' in filtered_df.columns:
     # Group by date, country, and product to get average prices
     trend_df = filtered_df.groupby(['beginDate', 'memberStateCode', 'product'])['price'].mean().reset_index()
@@ -103,7 +103,7 @@ else:
     st.warning("No date column found for trend analysis.")
     
 # Insight 3: Price comparison by country and variety
-st.subheader("🌍 Insight 3: Price Comparison by Country and Variety")
+st.subheader("🌍 3: Price Comparison by Country and Variety")
 price_comparison = filtered_df.groupby(['memberStateCode', 'variety_name'])['price'].mean().unstack()
 
 # Create a heatmap using Seaborn
@@ -115,7 +115,7 @@ ax5.set_title("Price Comparison by Country and Variety")
 st.pyplot(fig5)
 
 # Insight 4: Average prices by variety
-st.subheader("🍇 Insight 4: Average Prices by Variety")
+st.subheader("🍇 4: Average Prices by Variety")
 avg_prices_variety = filtered_df.groupby('variety_name')['price'].mean().sort_values(ascending=False)
 
 # Create a bar chart for varieties
@@ -127,7 +127,7 @@ ax3.set_title("Average Prices by Variety")
 st.pyplot(fig3)
 
 # Insight 5: Distribution of prices by product
-st.subheader("📊 Insight 5: Price Distribution by Product")
+st.subheader("📊 5: Price Distribution by Product")
 fig4, ax4 = plt.subplots(figsize=(10, 6))
 sns.boxplot(data=filtered_df, x='product', y='price', ax=ax4)
 ax4.set_xlabel("Product")
@@ -136,12 +136,12 @@ ax4.set_title("Price Distribution by Product")
 st.pyplot(fig4)
 
 # Insight 6: Top 5 most expensive varieties
-st.subheader("💎 Insight 6: Top 5 Most Expensive Varieties")
+st.subheader("💎 Insight 6: Top Most Expensive Varieties")
 top_5_expensive = filtered_df.groupby('variety_name')['price'].mean().nlargest(5)
 st.write(top_5_expensive)
 
 # Insight 7: Top 5 cheapest varieties
-st.subheader("💰 Insight 7: Top 5 Cheapest Varieties")
+st.subheader("💰 Insight 7: Top Most Cheapest Varieties ")
 top_5_cheapest = filtered_df.groupby('variety_name')['price'].mean().nsmallest(5)
 st.write(top_5_cheapest)
 
