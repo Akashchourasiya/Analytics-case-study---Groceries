@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Set the title and description of the dashboard
-st.title("🍎 Fruit Pricing Dashboard - January 2024 🍊")
+st.title("🍎 Fruit Pricing Dashboard🍊")
 st.write("""
 This dashboard provides insights into the pricing of apples, oranges, and pears in France, Portugal, and the Netherlands for January 2024.
 Use the filters below to explore the data.
