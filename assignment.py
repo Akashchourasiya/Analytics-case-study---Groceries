@@ -13,7 +13,7 @@ Use the filters below to explore the data.
 # Load the data from Task 1
 @st.cache_data  # Cache the data to improve performance
 def load_data():
-    return pd.read_csv(r'C:/Users/HP/Downloads/final_fruit.csv')
+    return pd.read_csv(r'final_fruit.csv')
 
 df = load_data()
 
