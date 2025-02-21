@@ -101,9 +101,21 @@ if 'beginDate' in filtered_df.columns:
     st.pyplot(fig2)
 else:
     st.warning("No date column found for trend analysis.")
+    
+# Insight 3: Price comparison by country and variety
+st.subheader("🌍 Insight 3: Price Comparison by Country and Variety")
+price_comparison = filtered_df.groupby(['memberStateCode', 'variety_name'])['price'].mean().unstack()
 
-# Insight 3: Average prices by variety
-st.subheader("🍇 Insight 3: Average Prices by Variety")
+# Create a heatmap using Seaborn
+fig5, ax5 = plt.subplots(figsize=(12, 8))
+sns.heatmap(price_comparison, annot=True, fmt=".2f", cmap="YlGnBu", ax=ax5)
+ax5.set_xlabel("Variety")
+ax5.set_ylabel("Country")
+ax5.set_title("Price Comparison by Country and Variety")
+st.pyplot(fig5)
+
+# Insight 4: Average prices by variety
+st.subheader("🍇 Insight 4: Average Prices by Variety")
 avg_prices_variety = filtered_df.groupby('variety_name')['price'].mean().sort_values(ascending=False)
 
 # Create a bar chart for varieties
@@ -114,8 +126,8 @@ ax3.set_ylabel("Average Price (€)")
 ax3.set_title("Average Prices by Variety")
 st.pyplot(fig3)
 
-# Insight 4: Distribution of prices by product
-st.subheader("📊 Insight 4: Price Distribution by Product")
+# Insight 5: Distribution of prices by product
+st.subheader("📊 Insight 5: Price Distribution by Product")
 fig4, ax4 = plt.subplots(figsize=(10, 6))
 sns.boxplot(data=filtered_df, x='product', y='price', ax=ax4)
 ax4.set_xlabel("Product")
@@ -123,27 +135,15 @@ ax4.set_ylabel("Price (€)")
 ax4.set_title("Price Distribution by Product")
 st.pyplot(fig4)
 
-# Insight 5: Top 5 most expensive varieties
-st.subheader("💎 Insight 5: Top 5 Most Expensive Varieties")
+# Insight 6: Top 5 most expensive varieties
+st.subheader("💎 Insight 6: Top 5 Most Expensive Varieties")
 top_5_expensive = filtered_df.groupby('variety_name')['price'].mean().nlargest(5)
 st.write(top_5_expensive)
 
-# Insight 6: Top 5 cheapest varieties
-st.subheader("💰 Insight 6: Top 5 Cheapest Varieties")
+# Insight 7: Top 5 cheapest varieties
+st.subheader("💰 Insight 7: Top 5 Cheapest Varieties")
 top_5_cheapest = filtered_df.groupby('variety_name')['price'].mean().nsmallest(5)
 st.write(top_5_cheapest)
-
-# Insight 7: Price comparison by country and variety
-st.subheader("🌍 Insight 7: Price Comparison by Country and Variety")
-price_comparison = filtered_df.groupby(['memberStateCode', 'variety_name'])['price'].mean().unstack()
-
-# Create a heatmap using Seaborn
-fig5, ax5 = plt.subplots(figsize=(12, 8))
-sns.heatmap(price_comparison, annot=True, fmt=".2f", cmap="YlGnBu", ax=ax5)
-ax5.set_xlabel("Variety")
-ax5.set_ylabel("Country")
-ax5.set_title("Price Comparison by Country and Variety")
-st.pyplot(fig5)
 
 filtered_df.drop(filtered_df.columns[df.columns.str.contains('unnamed',case = False)],axis = 1, inplace = True)
 
