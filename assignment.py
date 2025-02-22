@@ -7,8 +7,8 @@ import seaborn as sns
 st.title("🍎 Fruit Pricing Dashboard🍊")
 st.write("""
 This dashboard provides insights into the pricing of apples, oranges, and pears in France, Portugal, and the Netherlands from January 2024.
-Use the filters below to explore the data.
 """)
+st.write("""Use the filters in sidebar to explore the data""")
 
 # Load the data from Task 1
 @st.cache_data  # Cache the data to improve performance
